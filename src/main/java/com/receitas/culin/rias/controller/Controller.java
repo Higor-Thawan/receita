@@ -3,9 +3,12 @@ package com.receitas.culin.rias.controller;
 import com.receitas.culin.rias.model.Receita;
 import com.receitas.culin.rias.model.Usuario;
 import com.receitas.culin.rias.service.ReceitaService;
+import com.receitas.culin.rias.service.TokenService;
 import com.receitas.culin.rias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +20,18 @@ public class Controller {
     private ReceitaService receitaService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private AuthenticationManager authmanager;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/receita")
-    public ResponseEntity create(@RequestBody Receita receitas) {
+    public ResponseEntity create(@RequestBody Receita receitas, @RequestHeader("authorization") String token) {
 
-        receitaService.create(receitas);
+
+        Long idUsuario = tokenService.getIdUsuario(token);
+
+        receitaService.create(receitas, idUsuario);
 
         return ResponseEntity.ok().build();
     }
@@ -70,7 +80,7 @@ public class Controller {
     @PutMapping("/usuario/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable String id, @RequestBody Usuario usuario) {
 
-        return ResponseEntity.ok(usuarioService.update(Integer.parseInt(id), usuario));
+        return ResponseEntity.ok(usuarioService.update(Long.parseLong(id), usuario));
     }
 
     @DeleteMapping("/usuario/{id}")

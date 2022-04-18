@@ -11,7 +11,11 @@ public enum Tipos {
     SALADA("salada"),
     PRINCIPAL("principal"),
     SOPA("sopa"),
-    SOBREMESA("sobremesa");
+    SOBREMESA("sobremesa"),
+    PETISCO("petisco"),
+    CARNE("carne"),
+    AVE("ave");
+
 
     private String descricao;
 

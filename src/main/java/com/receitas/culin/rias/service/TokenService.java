@@ -1,6 +1,7 @@
 package com.receitas.culin.rias.service;
 
 import com.receitas.culin.rias.model.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +19,11 @@ public class TokenService {
     @Value("${receita.jwt.secret}")
     private String secret;
 
+    //Metodo para gerar o token
     public String gerarToken(Authentication authentication) {
         Usuario logado = (Usuario) authentication.getPrincipal();
         Date hoje = new Date();
-        Date dataexpiration = new Date(hoje.getTime() + expiration );
+        Date dataexpiration = new Date(hoje.getTime() + Long.parseLong(expiration));
         return Jwts.builder()
                 .setIssuer("Receita")
                 .setSubject(String.valueOf(logado.getId()))
@@ -30,5 +32,23 @@ public class TokenService {
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
 
+    }
+
+    //Metodo para fazer a validação
+    public Boolean isTokenValido(String token) {
+        try{
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+    public Long getIdUsuario(String token) {
+
+        String tokenHash = token.split(" ") [1];
+
+        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(tokenHash).getBody();
+        return Long.parseLong(claims.getSubject());
     }
 }

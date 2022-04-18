@@ -18,8 +18,6 @@ public class Receita {
     @ManyToOne
     private Usuario usuario;
 
-    private int idUsuario;
-
     public Receita() {
     }
 
@@ -67,14 +65,6 @@ public class Receita {
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
 }

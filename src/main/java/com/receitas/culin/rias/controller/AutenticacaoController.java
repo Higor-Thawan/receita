@@ -1,5 +1,6 @@
 package com.receitas.culin.rias.controller;
 
+import com.receitas.culin.rias.dto.TokenDto;
 import com.receitas.culin.rias.model.LoginForm;
 import com.receitas.culin.rias.service.TokenService;
 import com.sun.source.tree.TryTree;
@@ -27,19 +28,16 @@ public class AutenticacaoController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form ) {
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form ) {
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 
         try {
             Authentication authentication = authManager.authenticate(dadosLogin);
             String token = tokenService.gerarToken(authentication);
-            System.out.println(token);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().build();
         }
-
-
 
     }
 

@@ -19,9 +19,9 @@ public class ReceitaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public void create(Receita receitas) {
+    public void create(Receita receitas, Long idUsario) {
 
-        Usuario usuario = usuarioRepository.findById((long) receitas.getIdUsuario()).get();
+        Usuario usuario = usuarioRepository.findById(idUsario).get();
         receitas.setUsuario(usuario);
         receitaRepository.save(receitas);
 
