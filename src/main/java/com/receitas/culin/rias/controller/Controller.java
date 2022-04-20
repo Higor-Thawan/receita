@@ -28,8 +28,9 @@ public class Controller {
     @PostMapping("/receita")
     public ResponseEntity create(@RequestBody Receita receitas, @RequestHeader("authorization") String token) {
 
+        String tokenHash = token.split( " ")[1];
 
-        Long idUsuario = tokenService.getIdUsuario(token);
+        Long idUsuario = tokenService.getIdUsuario(tokenHash);
 
         receitaService.create(receitas, idUsuario);
 
