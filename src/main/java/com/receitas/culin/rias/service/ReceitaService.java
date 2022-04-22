@@ -13,11 +13,14 @@ import java.util.List;
 @Service
 public class ReceitaService {
 
-    @Autowired
     private ReceitaRepository receitaRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+        public ReceitaService(ReceitaRepository receitaRepository, UsuarioRepository usuarioRepository) {
+        this.receitaRepository = receitaRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public void create(Receita receitas, Long idUsario) {
 
@@ -32,7 +35,6 @@ public class ReceitaService {
        return receitaRepository.findAll();
 
     }
-
 
     public Receita findById(int id) {
 
