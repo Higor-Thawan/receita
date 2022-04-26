@@ -30,7 +30,7 @@ class ReceitaTest {
         usuario1.setSenha("12345");
         usuario1.setId(1L);
         usuario1.setNome("Teste");
-        assertEquals("Teste", usuario.getUsuario());
+        assertEquals("Teste", usuario.getUsuario().getNome());
 
 
     }
