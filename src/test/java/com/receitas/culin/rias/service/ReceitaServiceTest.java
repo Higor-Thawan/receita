@@ -5,6 +5,7 @@ import com.receitas.culin.rias.model.Receita;
 import com.receitas.culin.rias.model.Usuario;
 import com.receitas.culin.rias.repository.ReceitaRepository;
 import com.receitas.culin.rias.repository.UsuarioRepository;
+import com.receitas.culin.rias.service.ReceitaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,13 +41,6 @@ class ReceitaServiceTest {
         this.userRepository = mock(UsuarioRepository.class);
     }
 
-/*
-    @BeforeEach
-    public void ReceitaServiceTest() {
-        MockitoAnnotations.openMocks(this);
-        this.service = new ReceitaService(receitaRepository, userRepository);
-    }
-*/
     @Test
     void deveCriarUmaReceita() {
         var receita = new Receita(1, "Higor", "estagiario", Tipos.PRINCIPAL);
