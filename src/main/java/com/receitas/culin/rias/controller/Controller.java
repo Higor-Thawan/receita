@@ -8,7 +8,6 @@ import com.receitas.culin.rias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +15,18 @@ import java.util.List;
 @RestController
 public class Controller {
 
-    @Autowired
     private ReceitaService receitaService;
-    @Autowired
     private UsuarioService usuarioService;
-    @Autowired
     private AuthenticationManager authmanager;
-    @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    public Controller(ReceitaService receitaService, UsuarioService usuarioService, AuthenticationManager authmanager, TokenService tokenService) {
+        this.receitaService = receitaService;
+        this.usuarioService = usuarioService;
+        this.authmanager = authmanager;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping("/receita")
     public ResponseEntity create(@RequestBody Receita receitas, @RequestHeader("authorization") String token) {
@@ -57,7 +60,7 @@ public class Controller {
     }
 
     @DeleteMapping("/receita/{id}")
-    public  ResponseEntity deleteReceita(@PathVariable String id) {
+    public  ResponseEntity deleteReceita(@PathVariable String id, Receita receita) {
 
         receitaService.delete(Integer.parseInt(id));
         return ResponseEntity.ok().build();
@@ -85,7 +88,7 @@ public class Controller {
     }
 
     @DeleteMapping("/usuario/{id}")
-    public  ResponseEntity deleteUsuario(@PathVariable String id) {
+    public  ResponseEntity deleteUsuario(@PathVariable String id, Usuario usuario) {
 
         usuarioService.delete(Integer.parseInt(id));
         return ResponseEntity.ok().build();

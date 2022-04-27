@@ -38,7 +38,7 @@ public class ReceitaService {
 
     public Receita findById(int id) {
 
-        return receitaRepository.findById(id).get();
+        return receitaRepository.findById(id).orElseThrow(()->new RuntimeException("usuario nao encontrado"));
 
     }
 
@@ -52,8 +52,9 @@ public class ReceitaService {
 
     @Transactional
     public void delete(int id) {
-
-        receitaRepository.deleteById(id);
+        var receita = findById(id);
+        if (receita != null)
+            receitaRepository.deleteById(id);
     }
 
 }
