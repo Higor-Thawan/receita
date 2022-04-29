@@ -5,22 +5,12 @@ import com.receitas.culin.rias.model.Receita;
 import com.receitas.culin.rias.model.Usuario;
 import com.receitas.culin.rias.repository.ReceitaRepository;
 import com.receitas.culin.rias.repository.UsuarioRepository;
-import com.receitas.culin.rias.service.ReceitaService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;

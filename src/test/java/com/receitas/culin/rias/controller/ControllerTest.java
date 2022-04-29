@@ -11,18 +11,21 @@ import org.mockito.InjectMocks;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 
 class ControllerTest {
 
     @InjectMocks
     private ReceitaService receitaService;
+
     private UsuarioService usuarioService;
     private AuthenticationManager authmanager;
 
     @InjectMocks
     private TokenService tokenService;
+    private Receita receita;
 
     public ControllerTest() {
         this.receitaService = mock(ReceitaService.class);
@@ -31,10 +34,18 @@ class ControllerTest {
         this.usuarioService = mock(UsuarioService.class);
     }
 
-   /* @Test
+    @Test
     void createReceitaSucess() {
-        String token = tokenService.
-    }*/
+        Receita receita = new Receita(1, "morango", "morango e mais morango", Tipos.SOBREMESA);
+
+        String token= "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiIyIiwiaWF0IjoxNTE2MjM5MDIyfQ.KO4UMOBU8FXfoS5uWxJ46hXPDd9ba4gag6mB1LOI6xw";
+
+        Controller controller = new Controller(receitaService,usuarioService,authmanager,tokenService);
+        var response = controller.create(receita,token);
+
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+
+    }
 
     @Test
     void findAllReceitaSucess() {
@@ -67,8 +78,13 @@ class ControllerTest {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
-    /*@Test
-    * void createUsuarioSucess() {}*/
+    @Test
+    void createUsuarioSucess() {
+        Usuario usuario = new Usuario(1, "teste", "teste@teste.com", "123");
+        Controller controller  = new Controller(receitaService,usuarioService,authmanager,tokenService);
+        var responseEntity = controller.createUsuario(usuario);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
 
     @Test
     void findAllUsuarioSucess() {

@@ -37,5 +37,4 @@ class UsuarioTest {
         assertNull(usuario.getId());
         assertNull(usuario.getEmail());
     }
-
 }
