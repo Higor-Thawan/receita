@@ -1,15 +1,9 @@
 package com.receitas.culin.rias.service;
 
 import com.receitas.culin.rias.model.Usuario;
-import com.receitas.culin.rias.service.TokenService;
-import com.receitas.culin.rias.service.UsuarioService;
-import org.apache.el.parser.Token;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 public class TokenServiceTest {
 
@@ -27,6 +21,8 @@ public class TokenServiceTest {
 
     @Test
     void gerarTokenSucess() {
+        var usuario = new Usuario(1L, "teste", "teste@teste.com", "123");
+        Usuario usuario1 = usuariologado.getAuthorities().addAll();
     }
 
     @Test

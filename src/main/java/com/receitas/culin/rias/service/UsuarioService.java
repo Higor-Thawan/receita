@@ -13,11 +13,14 @@ import java.util.List;
 @Service
 public class UsuarioService {
 
-    @Autowired
     private UsuarioRepository usuarioRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public void create(Usuario usuarios) {
 

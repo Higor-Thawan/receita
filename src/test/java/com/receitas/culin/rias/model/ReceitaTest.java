@@ -31,10 +31,6 @@ class ReceitaTest {
         usuario1.setId(1L);
         usuario1.setNome("Teste");
         assertEquals("Teste", usuario.getUsuario().getNome());
-
-
     }
-
-    private Receita usuario;
 
 }

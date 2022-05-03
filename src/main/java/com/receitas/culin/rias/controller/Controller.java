@@ -15,10 +15,10 @@ import java.util.List;
 @RestController
 public class Controller {
 
-    private static ReceitaService receitaService;
+    private ReceitaService receitaService;
     private UsuarioService usuarioService;
     private AuthenticationManager authmanager;
-    private static TokenService tokenService;
+    private TokenService tokenService;
     private Usuario usuarios;
 
     @Autowired
@@ -30,7 +30,7 @@ public class Controller {
     }
 
     @PostMapping("/receita")
-    public static ResponseEntity create(@RequestBody Receita receitas, @RequestHeader("authorization") String token) {
+    public ResponseEntity create(@RequestBody Receita receitas, @RequestHeader("authorization") String token) {
 
         String tokenHash = token.split( " ")[1];
 

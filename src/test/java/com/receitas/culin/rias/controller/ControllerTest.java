@@ -89,7 +89,7 @@ class ControllerTest {
     @Test
     void findAllUsuarioSucess() {
         Controller controller  = new Controller(receitaService,usuarioService,authmanager,tokenService);
-        var responseEntity= controller.findAll();
+        var responseEntity= controller.findAllUsuario();
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
