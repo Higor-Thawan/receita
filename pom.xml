@@ -10,6 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+
 	<groupId>com.receitas</groupId>
 	<artifactId>culin-rias</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -87,19 +88,19 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-
 
     </dependencies>
 
@@ -112,24 +113,35 @@
 			</plugin>
 
 			<plugin>
+
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version>
+
 				<executions>
+
 					<execution>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+
 					<!-- attached to Maven test phase -->
+
 					<execution>
 						<id>report</id>
 						<phase>test</phase>
+
 						<goals>
+
 							<goal>report</goal>
+
 						</goals>
+
 					</execution>
+
 				</executions>
+
 			</plugin>
 
 		</plugins>

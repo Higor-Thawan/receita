@@ -1,5 +1,6 @@
 package com.receitas.culin.rias.culinarias.controller;
 
+import com.receitas.culin.rias.culinarias.exceptions.BadRequestException;
 import com.receitas.culin.rias.culinarias.model.Receita;
 import com.receitas.culin.rias.culinarias.model.Usuario;
 import com.receitas.culin.rias.culinarias.service.ReceitaService;
@@ -81,9 +82,13 @@ public class Controller {
 
     @PostMapping("/usuario")
     public ResponseEntity createUsuario(@RequestBody Usuario usuario) {
+        try {
+            usuarioService.create(usuario);
+            return ResponseEntity.ok().build();
+        } catch (BadRequestException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionsController(HttpStatus.BAD_REQUEST, ex.getMessage()));
+        }
 
-        usuarioService.create(usuario);
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/usuario")

@@ -1,6 +1,8 @@
 package com.receitas.culin.rias.culinarias.service;
 
+import com.receitas.culin.rias.culinarias.exceptions.BadRequestException;
 import com.receitas.culin.rias.culinarias.exceptions.NotFoundException;
+import com.receitas.culin.rias.culinarias.helpers.EmailValidation;
 import com.receitas.culin.rias.culinarias.model.Usuario;
 import com.receitas.culin.rias.culinarias.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UsuarioService {
 
     public void create(Usuario usuarios) {
 
+        if (!EmailValidation.validation(usuarios.getEmail()))
+            throw new BadRequestException("Email invalido");
         usuarios.setSenha(passwordEncoder.encode(usuarios.getPassword()));
 
         usuarioRepository.save(usuarios);
