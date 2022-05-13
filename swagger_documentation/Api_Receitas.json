@@ -1,0 +1,482 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Receita",
+    "version": "1.0",
+    "description": "API sobre o projeto dos estagiarios."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/usuario",
+      "description": "Usuarios"
+    },
+    {
+      "url": "http://localhost:8080/receita",
+      "description": "Receitas"
+    }
+  ],
+  "paths": {
+    "/usuario": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Adiciona um Usuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "pong"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Retorna uma lista de usuarios",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "nome": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuario/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Retorna um usuario pelo ID",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mostra o ID do usuario",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Deleta um usuario cadastrado",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mostra o ID do usuario",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Atualiza um usuario cadastrada",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mostra o ID do usuario",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/receita": {
+      "post": {
+        "tags": [
+          "Receitas"
+        ],
+        "summary": "Adiciona uma receita",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Receitas"
+        ],
+        "summary": "Retorna uma lista de receitas",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idUsuario": {
+                        "type": "integer"
+                      },
+                      "nomeUsuario": {
+                        "type": "string"
+                      },
+                      "emailUsuario": {
+                        "type": "string"
+                      },
+                      "idReceita": {
+                        "type": "integer"
+                      },
+                      "nomeReceita": {
+                        "type": "string"
+                      },
+                      "decricaoReceita": {
+                        "type": "string"
+                      },
+                      "tipoReceita": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receita/{id}": {
+      "get": {
+        "tags": [
+          "Receitas"
+        ],
+        "summary": "Retorna uma receita pelo ID",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "description": "Mostra o ID da receita",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "idUsuario": {
+                      "type": "integer"
+                    },
+                    "nomeUsuario": {
+                      "type": "string"
+                    },
+                    "emailUsuario": {
+                      "type": "string"
+                    },
+                    "idReceita": {
+                      "type": "integer"
+                    },
+                    "nomeReceita": {
+                      "type": "string"
+                    },
+                    "decricaoReceita": {
+                      "type": "string"
+                    },
+                    "tipoReceita": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Receitas"
+        ],
+        "summary": "Deleta uma receita cadastrada",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mostra o ID do usuario",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Receitas"
+        ],
+        "summary": "Atualiza uma receita cadastrada",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Mostra o token de Autorização",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mostra o ID do usuario",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  }
+}
